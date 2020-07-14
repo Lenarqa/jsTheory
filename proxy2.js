@@ -10,4 +10,12 @@ const position = withDefaultValue({
     y:30
 }, 0);
 
-console.log(position);
+
+// hidden property
+const withHiddenProps = (target, prefixs = "_") =>{
+    return new Proxy(target, {
+        has: (obj, prop) => (prop in obj) && (!prop.startsWith(prefixs)),
+        ownKeys: (obj) => Reflect.ownKeys(obj)
+    });
+
+}
